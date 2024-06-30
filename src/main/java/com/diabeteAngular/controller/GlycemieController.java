@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class GlycemieController {
 
     @Autowired
@@ -19,10 +20,13 @@ public class GlycemieController {
         return glycemieService.getAllGlycemies();
     }
 
+    @GetMapping("/findById/{id}")
+    public Glycemie getGlycemieById(@PathVariable Integer id) {
+        return glycemieService.getGlycemieById(id);
+    }
     @PostMapping("/save")
-    public String AddGlycemie(@RequestBody Glycemie glycemie) {
-        glycemieService.addGlycemie(glycemie);
-        return "Saved ...";
+    public Glycemie AddGlycemie(@RequestBody Glycemie glycemie) {
+        return glycemieService.addGlycemie(glycemie);
     }
 
     @PutMapping("/update/{id}")
